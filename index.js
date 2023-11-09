@@ -8,6 +8,9 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 const registerRoute=require('./routes/client/register')
 const loginRoute=require('./routes/client/login')
+const clientViewRoute=require('./routes/client/view')
+const clientEditInformationRoute=require('./routes/client/edit-informations')
+const clientEditPasswordRoute=require('./routes/client/edit-password')
 
 // Variables d'enviroment
 require('dotenv').config();
@@ -47,8 +50,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Routes
 app.use("/api/register", registerRoute)
 app.use("/api/login", loginRoute)
+app.use("/api/client", clientViewRoute)
+app.use("/api/client/edit/information", clientEditInformationRoute)
+app.use("/api/client/edit/password", clientEditPasswordRoute)
 
 
 // Client : auth, register, voir fiche client et edit, modifier mdp
-// Produit : liste, une seul, liste promo / nouveauté et gestion promo
-// Commande : passer comamnde, paiement effecté, liste commandes passée, recupéré commande efectué
+// Produit : liste, un seul, liste promo / nouveauté et gestion promo
+// Commande : passer comamnde, paiement effectué, liste commandes passée, recupéré commande effectué
