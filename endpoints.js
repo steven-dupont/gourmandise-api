@@ -130,7 +130,7 @@ module.exports = function (app, pool, jwt, bcrypt) {
     // On récupère tous les produits
     /**
      * @swagger
-     * /products:
+     * /product:
      *  get:
      *      description: On récupère tous les produits
      *  responses:
