@@ -8,7 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 const registerRoute=require('./routes/client/register')
 const loginRoute=require('./routes/client/login')
-const clientViewRoute=require('./routes/client/view')
+const clientMeRoute=require('./routes/client/me')
 const clientEditInformationRoute=require('./routes/client/edit-informations')
 const clientEditPasswordRoute=require('./routes/client/edit-password')
 const productsRoute=require('./routes/product/fetchAll')
@@ -56,9 +56,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Client
 app.use("/api/register", registerRoute)
 app.use("/api/login", loginRoute)
-app.use("/api/client", clientViewRoute)
-app.use("/api/client/edit/information", clientEditInformationRoute)
-app.use("/api/client/edit/password", clientEditPasswordRoute)
+app.use("/api/me", clientMeRoute)
+app.use("/api/me/information/edit", clientEditInformationRoute)
+app.use("/api/me/password/edit", clientEditPasswordRoute)
 
 // Produits
 app.use("/api/products", productsRoute)
@@ -67,7 +67,6 @@ app.use("/api/product", productViewRoute)
 app.use("/api/products/news", productNewRoute)
 
 // Commandes
-
 
 
 // Client : auth, register, voir fiche client et edit, modifier mdp

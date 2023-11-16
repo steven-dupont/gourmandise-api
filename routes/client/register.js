@@ -11,8 +11,12 @@ router.post("/", async (req, res) => {
     const bdd = await database();
 
     try{
-        await bdd.execute("INSERT INTO client (nom, adresse, cp, ville, telephone, email, motdepasse) VALUES (?, ?, ?, ?, ?, ?, ?)", values);
-        res.sendStatus(201);
+        if(nom.length === 0 || adresse.length === 0 || cp.length === 0 || ville.length === 0 || telephone.length === 0 || email.length === 0 || motdepasse.length === 0){
+            res.status(500).json({ status: "error", message: "Merci de remplir tous les champs !" });
+        } else {
+            await bdd.execute("INSERT INTO client (nom, adresse, cp, ville, telephone, email, motdepasse) VALUES (?, ?, ?, ?, ?, ?, ?)", values);
+            res.status(201).json({ status: "success", message: 'Votre compte a bien été créé.' });
+        }
     }
     catch (err){
         console.log(err);
