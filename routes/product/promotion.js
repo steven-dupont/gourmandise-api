@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
         if(productsPromotion.length === 0){
             // Aucun produit
-            res.status(500).json({ status: "error", message: "Aucun produit en promotion n'a été trouvé" });
+            res.status(500).json({ status: "error", message: "PROMOTIONAL_PRODUCT_NOT_FOUND" });
         }
         else{
             res.status(200).json(productsPromotion);

@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     const cookies = req.headers.cookie;
 
     if (!cookies) {
-        return res.status(401).json({ status: "error", message: 'Accès refusé.' });
+        return res.status(401).json({ status: "error", message: 'ACCESS_DENIED' });
     }
 
     const parsedCookies = cookie.parse(cookies);
@@ -20,9 +20,9 @@ module.exports = (req, res, next) => {
             next();
         } catch (error) {
             console.error(error);
-            res.status(401).json({ status: "error", message: 'Le token JWT est invalide ! Veuillez vous reconnecter.' });
+            res.status(401).json({ status: "error", message: 'NOT_CONNECTED' });
         }
     } else {
-        res.status(401).json({ status: "error", message: 'Accès refusé.' });
+        res.status(401).json({ status: "error", message: 'ACCESS_DENIED' });
     }
 };

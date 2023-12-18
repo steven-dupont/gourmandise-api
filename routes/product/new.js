@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
         if(newProducts.length === 0){
             // Aucun produit
-            res.status(500).json({ status: "error", message: "Aucun produit n'a été trouvé" });
+            res.status(500).json({ status: "error", message: "PRODUCT_NOT_FOUND" });
         }
         else{
             res.status(200).json(newProducts);

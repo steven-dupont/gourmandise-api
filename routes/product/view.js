@@ -11,7 +11,7 @@ router.get("/:id", async (req, res) => {
 
         if(produit.length === 0){
             // Produit introuvable
-            res.status(500).json({ status: "error", message: "Le produit '" + req.params.id + "' n'existe pas." });
+            res.status(500).json({ status: "error", message: "PRODUCT_NOT_FOUND" });
         }
         else{
             res.status(200).json(produit);

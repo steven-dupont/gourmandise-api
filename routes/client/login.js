@@ -13,21 +13,21 @@ router.post("/", async (req, res) => {
         const [utilisateur] = await bdd.execute("SELECT codec, email, motdepasse FROM client WHERE email = ?", [email]);
 
         if(email.length === 0 || motdepasse.length === 0){
-            res.status(500).json({ status: "error", message: "Merci de remplir tous les champs !" });
+            res.status(500).json({ status: "error", message: "EMPTY_FILEDS" });
         } else {
             if (utilisateur.length === 0) {
                 // Utilisateur introuvable
-                res.status(500).json({ status: "error", message: "Les informations de connexion sont incorrect." });
+                res.status(500).json({ status: "error", message: "INVALID_INDENTIFIERS" });
             } else {
                 const isPasswordCorrect = await bcrypt.compare(motdepasse, utilisateur[0].motdepasse);
 
                 if (isPasswordCorrect) {
                     const token = jwt.sign({ id: utilisateur[0].codec }, process.env.JWT_SECRET, { expiresIn: "24h" });
                     res.cookie('jwtToken', token, { httpOnly: true, maxAge: 86400000 });
-                    res.status(200).json({ status: "success", token: token });
+                    res.status(200).json({ status: "success", message: "CONNECTED", token: token });
                 } else {
                     // Mot de passe incorrect
-                    res.status(500).json({ status: "error", message: "Les informations de connexion sont incorrect." });
+                    res.status(500).json({ status: "error", message: "INVALID_IDENTIFIERS" });
                 }
             }
         }

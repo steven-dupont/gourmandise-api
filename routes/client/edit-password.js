@@ -12,18 +12,16 @@ router.post("/", auth, async (req, res) => {
     const bdd = await database();
 
     try{
-        const [client] = await bdd.execute("SELECT codec FROM client WHERE codec = ?", [req.user.id]);
-
         if(motdepasse.length === 0 || confirmerMdp.length === 0){
-            res.status(500).json({ status: "error", message: "Les champs ne peuvent pas être vide !" });
+            res.status(500).json({ status: "error", message: "EMPTY_FILEDS" });
         }
         else{
             if(motdepasse !== confirmerMdp){
-                res.status(500).json({ status: "error", message: "Les mots de passe ne correspondent pas !" });
+                res.status(500).json({ status: "error", message: "INVALID_IDENTIFIERS" });
             }
             else{
                 await bdd.execute("UPDATE client SET motdepasse = ? WHERE codec = " + [req.user.id], values);
-                res.status(200).json({ status: "success", message: "Votre mot de passe a bien été modifié !" });
+                res.status(200).json({ status: "success", message: "UPDATED_PASSWORD" });
             }
         }
     }

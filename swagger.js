@@ -9,7 +9,7 @@ const options = {
             description: 'Documentation de l\'API Gourmandise',
         },
     },
-    apis: ['./endpoints.js'],
+    apis: ['./routes/**/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
